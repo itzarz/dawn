@@ -1,9 +1,13 @@
-<style>
+{%- style -%}
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     //transition: all 0.3s ease;
+  }
+
+  .shopify-section-group-header-group {
+    z-index: 100;
   }
 
   header {
@@ -13,22 +17,22 @@
     font-weight: normal;
     font-style: normal;
     color: #fff2e6;
-    z-index: 5;
   }
 
   .bakedream-header {
     display: flex;
     width: 100%;
-    max-width: 1620px;
+    max-width: 855px;
     align-items: center;
     justify-content: space-between;
     background-color: rgba(101, 18, 33, 0.95);
-    border-radius: 16px;
-    padding: 15px 50px;
+    border-radius: 64px;
+    padding: 5px 50px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     transition: all 0.3s ease;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px;
+    box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.2) inset, 0px 2px 8px 0px rgba(255, 242, 230, 0.25) inset,
+      0px 10px 15px 0px rgba(0, 0, 0, 0.15), 0px 20px 35px 0px rgba(0, 0, 0, 0.2);
   }
 
   .logo {
@@ -41,19 +45,21 @@
   .header-nav {
     display: flex;
     font-size: 16px;
+    padding: 15px 0px;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 
     & a {
       color: var(--old-lace);
-      padding: 5px 20px;
+      padding: 5px 15px;
       font-weight: 500;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 24px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    & a:hover {
+    & a:hover,
+    a:focus {
       color: #651221;
       background-color: #fff2e6;
     }
@@ -72,50 +78,52 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    width: 74px;
-    height: 49px;
+    width: fit-content;
+    height: fit-content;
+
+    & .header-icon {
+      width: 20px;
+      height: 20px;
+    }
 
     & a {
-      padding: 5px;
+      padding: 6px;
       background: none;
-      border: none;
+      border: 2px solid transparent;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
-      color: var(--old-lace);
-      transition: background-color 0.3s ease, color 0.3s ease;
+      border-radius: 100%;
+      background-color: var(--old-lace);
+      color: var(--chocolate-cosmos);
+      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 
-      &:hover {
-        background-color: var(--old-lace);
-        color: var(--chocolate-cosmos);
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        border: 2px solid var(--old-lace);
+        color: var(--old-lace);
       }
-    }
-
-    & a i {
-      font-size: 24px;
-      align-items: center;
-      justify-content: center;
     }
   }
 
   .cart-count {
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: -9px;
+    right: -9px;
     color: var(--onyx);
     background-color: var(--old-lace);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
   }
 
   .shopping-cart-btn {
@@ -145,7 +153,7 @@
     right: 0;
     height: 0;
     width: 100%;
-    border-radius: 16px;
+    border-radius: 32px;
     background-color: rgba(101, 18, 33, 0.9);
     backdrop-filter: blur(16px);
     padding: 20px;
@@ -165,7 +173,8 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     border: 2px solid transparent;
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: var(--chocolate-cosmos);
       background-color: var(--old-lace);
     }
@@ -186,6 +195,7 @@
     height: 410px;
     opacity: 1;
     visibility: visible;
+    padding-top: 50px;
   }
 
   .close-btn {
@@ -251,14 +261,16 @@
       display: none;
     }
   }
-</style>
+{%- endstyle -%}
 
 <header class="bakedream-header">
-  <a href="/" class="logo">
+  <a href="{{ routes.route_url }}" class="logo">
     <img
       src="{{ 'brand-logo.svg' | asset_url }}"
       alt="BakeDream Official Logo"
       style="width: 100%; height: auto; max-width: 80px;"
+      width="80"
+      height="50"
     >
   </a>
 
@@ -269,10 +281,10 @@
 
   <!-- Navigation Menu Bar (Desktop) -->
   <nav class="header-nav">
-    <a href="/">Home</a>
-    <a href="/collections/all">Our Cookies</a>
+    <a href="{{ routes.root_url }}">Home</a>
+    <a href="/pages/about">About</a>
+    <a href="{{ routes.all_products_collection_url }}">Cookies</a>
     <a href="/pages/faq">FAQ</a>
-    <a href="/collections/all" class="order-btn">Order</a>
   </nav>
 
   <!-- User Actions -->
@@ -282,12 +294,13 @@
         class="user-btn rounded-btn"
         href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
         rel="nofollow"
+        aria-label="My Account"
       >
-        <i data-lucide="user"></i>
+        <i data-lucide="user-round" class="header-icon"></i>
       </a>
     {%- endif -%}
-    <a href="{{ routes.cart_url }}" class="shopping-cart-btn rounded-btn">
-      <i data-lucide="shopping-cart"></i>
+    <a href="{{ routes.cart_url }}" class="shopping-cart-btn rounded-btn" aria-label="Shopping Cart">
+      <i data-lucide="shopping-cart" class="header-icon"></i>
       {%- if cart != empty -%}
         {%- if cart.item_count < 100 -%}
           <span aria-hidden="true" class="cart-count" id="cartCount">{{ cart.item_count }}</span>
@@ -302,9 +315,10 @@
   <!-- Aside menu for mobile -->
   <aside class="mobile-menu" id="mobileMenu">
     <button class="close-btn" id="closeMenuBtn"><i data-lucide="x"></i></button>
-    <a href="/">Home</a>
-    <a href="/collections/all">Our Cookies</a>
-    <a href="/cart" class="shopping-cart-btn">
+    <a href="{{  routes.root_url }}">Home</a>
+    <a href="/pages/about">About</a>
+    <a href="{{ routes.all_products_collection_url }}">Our Cookies</a>
+    <a href="{{ routes.cart_url }}" class="shopping-cart-btn">
       Shopping Cart
       {%- if cart != empty -%}
         {%- if cart.item_count < 100 -%}
@@ -317,11 +331,22 @@
     </a>
     <a href="/pages/faq">FAQ</a>
     {%- if shop.customer_accounts_enabled -%}
-      <a href="/login" class="order-btn">Log In <i data-lucide="user"></i></a>
+      <a
+        href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+        rel="nofollow"
+        class="order-btn"
+      >
+        {% if customer %}
+          My Account
+        {% else %}
+          Login
+        {% endif %}
+        <i data-lucide="user"></i>
+      </a>
     {%- endif -%}
   </aside>
 </header>
-<script>
+{%- javascript -%}
   /* Menu Mobile JS */
   document.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('mobileMenu');
@@ -350,4 +375,4 @@
       }
     });
   });
-</script>
+{%- endjavascript -%}

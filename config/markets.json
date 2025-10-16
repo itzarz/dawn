@@ -8,13 +8,5 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "product-grid": {
-      "type": "main-collection-product",
-      "settings": {}
-    }
-  },
-  "order": [
-    "product-grid"
-  ]
+  "markets": {}
 }

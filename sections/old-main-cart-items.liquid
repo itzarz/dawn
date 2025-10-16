@@ -1,284 +1,51 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{{ 'component-totals.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+
 {%- style -%}
-  .bdcart__quantity-input::-webkit-outer-spin-button,
-  .bdcart__quantity-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  .bdcart__quantity-input {
-    -moz-appearance: textfield;
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  .bdcart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 100px 10dvw 40px 10dvw;
-    gap: 40px;
-  }
-
-  .bdcart__titles {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .bdcart__title {
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--onyx);
-  }
-
-  .bdcart-item__productinfo {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    text-align: left;
-  }
-
-  .bdcart-item__image {
-    border-radius: 8px;
-    object-fit: cover;
-  }
-
-  .bdcart-item__productinfo-text {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .bdcart-item__pricing {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-  }
-
-  .bdcart-item__total {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
-  }
-
-  .bdcart-item__price {
-    font-size: clamp(12px, 1.5vw, 20px);
-    font-weight: 300;
-    color: var(--onyx);
-  }
-
-  .price--old {
-    text-decoration: line-through;
-    opacity: 0.5;
-    color: var(--onyx);
-  }
-
-  .bdcart-item_title {
-    font-size: clamp(12px, 1.5vw, 20px);
-    font-weight: 500;
-    color: var(--onyx);
-    text-decoration: none;
-  }
-
-  .bdcart-item__variant {
-    padding: 5px 10px;
-    background-color: var(--dark-vanilla);
-    color: var(--onyx);
-    width: fit-content;
-    border-radius: 4px;
-  }
-
-  .bdcart__actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 5px;
-  }
-
-  .bdcart__quantity-selector {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    border: 2px solid var(--dark-vanilla);
-    border-radius: 24px;
-  }
-
-  .quantity-btn {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none;
-    padding: 10px;
-    border-radius: 32px;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--onyx);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  .bdcart__quantity-input {
-    width: 35px;
-    text-align: center;
-    font-size: 16px;
-    font-family: var(--font-unbounded), sans-serif;
-    border: none;
-    background: none;
-    pointer-events: none;
-    color: var(--onyx);
-  }
-
-  .bdcart__final-price {
-    text-align: right;
-  }
-
-  .bdcart__grid {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .bdcart__grid-mobile {
-    display: none;
-  }
-
-  .bdcart__grid-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    font-weight: 300;
-    padding: 20px 30px;
-    color: var(--snow);
-    background-color: var(--chocolate-cosmos);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-  }
-
-  .bdcart__grid-header p {
-    color: var(--snow);
-    font-size: 20px;
-  }
-
-  .bdcart__grid-header p:last-child {
-    text-align: right;
-  }
-
-  .bdcart__grid-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    align-items: center;
-    border-left: 1px solid var(--dark-vanilla);
-    border-right: 1px solid var(--dark-vanilla);
-    padding: 30px;
-    gap: 20px;
-  }
-
-  .bdcart__grid-row:not(:last-child) {
-    border-bottom: 1px solid var(--dark-vanilla);
-  }
-
-  .bdcart__grid-row:last-child {
-    border-bottom: 1px solid var(--dark-vanilla);
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-
-  .semi-bold {
-    font-weight: 500;
-  }
-
-  .bdcart__progress-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .bdcart__progress-text {
-    font-size: 14px;
-    color: var(--onyx);
-    margin-bottom: 4px;
-    text-align: center;
-  }
-
-  /* Responsive grid */
-  @media screen and (max-width: 768px) {
-    .bdcart__grid {
-      display: none;
-    }
-
-    .bdcart__grid-header {
-      grid-template-columns: 1fr;
-    }
-
-    .bdcart__grid-header p {
-      text-align: center;
-    }
-
-    .bdcart__grid-header p:last-child {
-      text-align: center;
-    }
-
-    .bdcart__grid-mobile {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .bdcart-item__image {
-      width: 95px;
-      border-radius: 6px;
-    }
-
-    .bdcart__grid-row {
-      padding: 10px;
-    }
-
-    .quantity-btn {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 {%- endstyle -%}
 
-{%- assign free_shipping_threshold = 6399 -%}
-{%- assign cart_total = cart.total_price -%}
-{%- assign remaining = free_shipping_threshold | minus: cart_total -%}
-{%- assign progress = cart_total | times: 100 | divided_by: free_shipping_threshold | round -%}
-{%- if progress > 100 -%}
-  {%- assign clamped_percent = 100 -%}
-{%- else -%}
-  {%- assign clamped_percent = progress -%}
-{%- endif -%}
+{%- unless settings.cart_type == 'drawer' -%}
+  <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
 
-<cart-items class="bdcart" id="cart-container">
-  <div class="bdcart__titles">
-    <h2 class="bdcart__title">{{ 'sections.cart.title' | t }}</h2>
-    <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
-      {{ 'general.continue_shopping' | t }}
-    </a>
-  </div>
-  {% if cart.item_count > 0 %}
-    <div class="bdcart__progress-wrapper">
-      <div class="bdcart__progress-text">
-        {% if cart_total > free_shipping_threshold %}
-          <p>🎉 You are eligible for free shipping.</p>
-        {% else %}
-          <p>
-            🚚 Spend <strong>{{ remaining | money_with_currency }}</strong> more to reach free shipping!
-          </p>
-        {% endif %}
-      </div>
+<script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+
+<cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+  <div class="page-width">
+    <div class="title-wrapper-with-link">
+      <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+      <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
+        {{- 'general.continue_shopping' | t -}}
+      </a>
     </div>
-  {% endif %}
-  <form action="{{ routes.cart_url }}" method="post" id="cart" class="bdcart__grid-mobile">
-    <div class="bdcart__grid-header">
-      <p>{{ 'sections.cart.headings.product' | t }}s</p>
+
+    <div class="cart__warnings">
+      <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
+      <a href="{{ routes.all_products_collection_url }}" class="button">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+
+      {%- if shop.customer_accounts_enabled and customer == null -%}
+        <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
+        <p class="cart__login-paragraph">
+          {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
+        </p>
+      {%- endif -%}
     </div>
 
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
@@ -312,21 +79,15 @@
 
               <tbody>
                 {%- for item in cart.items -%}
-                  <tr
-                    class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}"
-                    id="CartItem-{{ item.index | plus: 1 }}"
-                    {% if item.parent_relationship.parent != null %}
-                      aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
-                    {% endif %}
-                  >
+                  <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                     <td class="cart-item__media">
                       {% if item.image %}
                         {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                         <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-                        <div class="cart-item__image-container gradient {% if item.parent_relationship.parent == null %}global-media-settings{% endif %}">
+                        <div class="cart-item__image-container gradient global-media-settings">
                           <img
                             src="{{ item.image | image_url: width: 300 }}"
-                            class="cart-item__image {% if item.parent_relationship.parent != null %}global-media-settings{% endif %}"
+                            class="cart-item__image"
                             alt="{{ item.image.alt | escape }}"
                             loading="lazy"
                             width="150"
@@ -437,7 +198,18 @@
                         {%- endif -%}
 
                         {%- if item.variant.available and item.unit_price_measurement -%}
-                          {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+                          <div class="unit-price caption">
+                            <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                            {{ item.unit_price | money }}
+                            <span aria-hidden="true">/</span>
+                            <span class="visually-hidden"
+                              >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
+                            >
+                            {%- if item.unit_price_measurement.reference_value != 1 -%}
+                              {{- item.unit_price_measurement.reference_value -}}
+                            {%- endif -%}
+                            {{ item.unit_price_measurement.reference_unit }}
+                          </div>
                         {%- endif -%}
                       </div>
                     </td>
@@ -469,15 +241,7 @@
                               </button>
                             {%- endif -%}
                             <quantity-input class="quantity cart-quantity">
-                              {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
-                              <button
-                                class="quantity__button"
-                                name="minus"
-                                type="button"
-                                {% if can_update_quantity == false %}
-                                  disabled
-                                {% endif %}
-                              >
+                              <button class="quantity__button" name="minus" type="button">
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                                 </span>
@@ -503,18 +267,8 @@
                                 aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
                                 id="Quantity-{{ item.index | plus: 1 }}"
                                 data-index="{{ item.index | plus: 1 }}"
-                                {% if can_update_quantity == false %}
-                                  disabled
-                                {% endif %}
                               >
-                              <button
-                                class="quantity__button"
-                                name="plus"
-                                type="button"
-                                {% if can_update_quantity == false %}
-                                  disabled
-                                {% endif %}
-                              >
+                              <button class="quantity__button" name="plus" type="button">
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                                 </span>
@@ -527,10 +281,6 @@
                           <cart-remove-button
                             id="Remove-{{ item.index | plus: 1 }}"
                             data-index="{{ item.index | plus: 1 }}"
-                            {% assign can_remove = item.instructions.can_remove | default: true %}
-                            {% if can_remove == false %}
-                              class="hidden"
-                            {% endif %}
                           >
                             <a
                               href="{{ item.url_to_remove }}"
@@ -664,7 +414,18 @@
                         {%- endif -%}
 
                         {%- if item.variant.available and item.unit_price_measurement -%}
-                          {% render 'unit-price', price: item.unit_price, measurement: item.unit_price_measurement %}
+                          <div class="unit-price caption">
+                            <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                            {{ item.unit_price | money }}
+                            <span aria-hidden="true">/</span>
+                            <span class="visually-hidden"
+                              >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
+                            >
+                            {%- if item.unit_price_measurement.reference_value != 1 -%}
+                              {{- item.unit_price_measurement.reference_value -}}
+                            {%- endif -%}
+                            {{ item.unit_price_measurement.reference_unit }}
+                          </div>
                         {%- endif -%}
                       </div>
                     </td>
@@ -673,229 +434,57 @@
               </tbody>
             </table>
           {%- endif -%}
-    {%- for item in cart.items -%}
-      <div
-        class="bdcart__grid-row"
-        data-line-price="{{ item.original_line_price | money_without_currency | replace: ',', '' }}"
-        data-line-quantity="{{ item.quantity }}"
-      >
-        <!-- Product Info -->
-        <div class="bdcart-item__productinfo">
-          <img
-            src="{{ item.image | image_url: width: 150 }}"
-            class="bdcart-item__image"
-            alt="{{ item.image.alt | escape }}"
-            loading="lazy"
-            width="150"
-            height="150"
-          >
-          <div class="bdcart-item__productinfo-text">
-            <div class="bdcart-item__pricing">
-              <h4 class="bdcart-item__price semi-bold">{{ item.final_line_price | money }}</h4>
-              {% if item.original_line_price > item.final_line_price %}
-                <h4 class="bdcart-item__price price--old semi-bold">{{ item.original_line_price | money }}</h4>
-              {% endif %}
-            </div>
-            <a href="{{ item.url }}" class="bdcart-item_title">{{ item.product.title | escape }}</a>
-            {%- if item.product.has_only_default_variant == false -%}
-              <p class="bdcart-item__variant"><strong>Style:</strong> {{ item.variant.title }}</p>
-            {%- endif -%}
-            <!-- Quantity Selector -->
-            <div class="bdcart__actions">
-              <div class="bdcart__quantity-selector">
-                <button type="button" name="minus" class="quantity-btn">
-                  <span class="visually-hidden">
-                    {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
-                  </span>
-                  <i data-lucide="minus"></i>
-                </button>
-                <input type="hidden" name="id" id="itemId" value="{{ item.variant.id }}">
-                <input
-                  type="number"
-                  id="Quantity-{{ item.index | plus: 1 }}"
-                  data-index="{{ item.index | plus: 1 }}"
-                  data-quantity-variant-id="{{ item.variant.id }}"
-                  data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-                  aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-                  name="updates[]"
-                  class="bdcart__quantity-input"
-                  min="1"
-                  step="1"
-                  value="{{ item.quantity }}"
-                  readonly
-                >
-                <button type="button" name="plus" class="quantity-btn">
-                  <span class="visually-hidden">
-                    {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
-                  </span>
-                  <i data-lucide="plus"></i>
-                </button>
-              </div>
-              <cart-remove-button>
-                <a
-                  href="{{ item.url_to_remove }}"
-                  class="button button--tertiary"
-                  aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
-                  style="margin-left: 15px; text-decoration: underline; font-family: var(--font-ltcushion), sans-serif;"
-                >
-                  Remove
-                </a>
-              </cart-remove-button>
-            </div>
-          </div>
         </div>
       </div>
-    {%- endfor -%}
-  </form>
-  <form action="{{ routes.cart_url }}" method="post" id="cart" class="bdcart__grid">
-    <div class="bdcart__grid-header">
-      <p>{{ 'sections.cart.headings.product' | t }}</p>
-      <p>{{ 'sections.cart.headings.quantity' | t }}</p>
-      <p>{{ 'sections.cart.headings.total' | t }}</p>
-    </div>
 
-    {%- for item in cart.items -%}
-      <div
-        class="bdcart__grid-row"
-        data-line-price="{{ item.original_line_price | money_without_currency | replace: ',', '' }}"
-        data-line-quantity="{{ item.quantity }}"
+      <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+      <p
+        class="visually-hidden"
+        id="shopping-cart-line-item-status"
+        aria-live="polite"
+        aria-hidden="true"
+        role="status"
       >
-        <!-- Product Info -->
-        <div class="bdcart-item__productinfo">
-          <img
-            src="{{ item.image | image_url: width: 150 }}"
-            class="bdcart-item__image"
-            alt="{{ item.image.alt | escape }}"
-            loading="lazy"
-            width="150"
-            height="150"
-          >
-          <div class="bdcart-item__productinfo-text">
-            <a href="{{ item.url }}" class="bdcart-item_title">{{ item.product.title | escape }}</a>
-            {% if item.product.compare_at_price > item.product.price %}
-              <div class="bdcart-item__pricing">
-                <h4 class="bdcart-item__price">{{ item.product.compare_at_price | money }}</h4>
-                <h4 class="bdcart-item__price price--old">{{ item.product.price | money }}</h4>
-              </div>
-            {% else %}
-              <h4 class="bdcart-item__price">{{ item.price | money }}</h4>
-            {% endif %}
-            {%- if item.product.has_only_default_variant == false -%}
-              <p class="bdcart-item__variant"><strong>Style:</strong> {{ item.variant.title }}</p>
-            {%- endif -%}
-          </div>
-        </div>
-
-        <!-- Quantity Selector -->
-        <div class="bdcart__actions">
-          <div class="bdcart__quantity-selector">
-            <button type="button" name="minus" class="quantity-btn">
-              <span class="visually-hidden">
-                {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
-              </span>
-              <i data-lucide="minus"></i>
-            </button>
-            <input type="hidden" name="id" id="itemId" value="{{ item.variant.id }}">
-            <input
-              type="number"
-              id="Quantity-{{ item.index | plus: 1 }}"
-              data-index="{{ item.index | plus: 1 }}"
-              data-quantity-variant-id="{{ item.variant.id }}"
-              data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-              aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
-              name="updates[]"
-              class="bdcart__quantity-input"
-              min="1"
-              step="1"
-              value="{{ item.quantity }}"
-              readonly
-            >
-            <button type="button" name="plus" class="quantity-btn">
-              <span class="visually-hidden">
-                {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
-              </span>
-              <i data-lucide="plus"></i>
-            </button>
-          </div>
-          <cart-remove-button>
-            <a
-              href="{{ item.url_to_remove }}"
-              class="button button--tertiary"
-              aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
-              style="margin-left: 15px; text-decoration: underline; font-family: var(--font-ltcushion), sans-serif;"
-            >
-              Remove
-            </a>
-          </cart-remove-button>
-        </div>
-
-        <!-- Price Info -->
-        <div class="bdcart__final-price">
-          <i data-lucide="loader-circle" class="bdcart-loading-spinner" style="display: none;"></i>
-          <div class="bdcart-item__total">
-            <h4 class="bdcart-item__price semi-bold">{{ item.final_line_price | money }}</h4>
-            {% if item.original_line_price > item.final_line_price %}
-              <h4 class="bdcart-item__price price--old semi-bold">{{ item.original_line_price | money }}</h4>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    {%- endfor -%}
-  </form>
+        {{ 'accessibility.loading' | t }}
+      </p>
+    </form>
+  </div>
 </cart-items>
 
-{%- javascript -%}
-  async function updateCartItem(id, quantity) {
-    try {
-      const response = await fetch('/cart/change.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ id, quantity }),
-      });
-
-      if (!response.ok) throw new Error('There was an error updating your cart.');
-
-      const cart = await fetch('/cart.js').then((res) => res.json());
-      renderCart(cart);
-    } catch (error) {
-      console.error("Error: We can't update your cart.");
+{% schema %}
+{
+  "name": "t:sections.main-cart-items.name",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
     }
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.quantity-btn').forEach((btn) => {
-      btn.addEventListener('click', async function () {
-        btn.setAttribute('disabled', true);
-        const cartGrid = document.querySelector('.bdcart__grid');
-
-        const quantityInput = this.parentElement.querySelector("input[type='number']");
-        let currentQty = parseInt(quantityInput.value);
-        const isIncrement = this.name === 'plus';
-        const variantId = quantityInput.dataset.quantityVariantId;
-
-        if (isIncrement & (currentQty < 1)) {
-          currentQty = 1;
-        }
-        if (!isIncrement & (currentQty == 1)) {
-          return; /* TODO: Trigger a notification for informing min qty is 3. */
-        }
-
-        cartGrid.style.opacity = '0.2';
-
-        const newQty = isIncrement
-          ? currentQty + 1
-          : Math.max(1, currentQty - 1); /* TODO: Min Qty should be set in a theme setting. */
-
-        quantityInput.value = newQty;
-        await updateCartItem(variantId, newQty);
-
-        cartGrid.style.opacity = '1';
-        btn.removeAttribute('disabled');
-        location.reload();
-      });
-    });
-  });
-{%- endjavascript -%}
+  ]
+}
+{% endschema %}
