@@ -5,7 +5,11 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
-    padding: 150px 10dvw;
+    padding: 100px 30px;
+
+    @media (max-width: 767px) {
+      padding: 50px 15px;
+    }
   }
 
   .bd-buyat__title {
@@ -25,20 +29,29 @@
 
   .bd-buyat__container {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 50px;
     justify-content: center;
-    align-items: center;
-    gap: 100px;
+    max-width: 1280px;
   }
 
   .bd-buyat__item {
     position: relative;
     width: 100%;
-    max-width: 480px;
-    height: 550px;
+    min-height: 450px;
+    max-height: 650px;
     overflow: hidden;
     border-radius: 24px;
     transition: transform 0.3s ease;
+    justify-self: center;
+    align-self: center;
+  }
+
+  @media (max-width: 650px) {
+    .bd-buyat__item {
+      max-width: 480px;
+    }
   }
 
   .bd-buyat__item:hover,
@@ -55,6 +68,8 @@
     object-fit: cover;
     border-radius: 24px;
     z-index: 1;
+    background-position: center;
+    background-size: contain;
   }
 
   .bd-buyat__item-content {
@@ -78,20 +93,30 @@
     margin: 0;
     color: var(--snow);
   }
-
-  @media (max-width: 1280px) {
-    .bd-buyat__container {
-      flex-direction: column;
-      align-items: center;
-      gap: 50px;
-    }
-  }
 {%- endstyle -%}
 
 <section class="bd-buyat">
   <h2 class="bd-buyat__title">For local deliveries.</h2>
-  <p class="bd-buyat__description">We've partnered with CaraotasNYC to bring the BakeDream experience closer to you.</p>
+  <p class="bd-buyat__description">We've partnered with brands to bring our cookies closer to you.</p>
   <div class="bd-buyat__container">
+    <a
+      href="https://www.doordash.com/business/bake-dream-14462117/"
+      class="bd-buyat__item"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
+        class="bd-buyat__item-image"
+        src="{{ 'doordash.jpg' | asset_url }}"
+        alt="Caraotas Brooklyn"
+        width="480"
+        height="550"
+      >
+      <div class="bd-buyat__item-content">
+        <h4 class="bd-buyat__item-title">DoorDash</h4>
+        <p class="bd-buyat__item-address">Get a quick local delivery now!</p>
+      </div>
+    </a>
     <a
       href="https://order.caraotasnyc.com/"
       class="bd-buyat__item"

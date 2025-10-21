@@ -1,34 +1,34 @@
 {
   "sections": {
     "hero-section": {
-      "type": "hero-section",
+      "type": "hero-section"
     },
-    "selling_points-section": {
-      "type": "selling-points",
-    },
-    "bd-experience-section": {
-      "type": "bd-experience",
-    },
-    "about_bakedream-section": {
-      "type": "about-bakedream",
+    "bdbento-section": {
+      "type": "bd-bento"
     },
     "bd-features-section": {
-      "type": "bd-features",
+      "type": "bd-features"
     },
     "new_featured_collection": {
-      "type": "featured-collection",
+      "type": "featured-collection"
     },
     "buyAt-section": {
-      "type": "bd-buyAt",
+      "type": "bd-buyAt"
+    },
+    "buyADream-section": {
+      "type": "bd-buyDream"
+    },
+    "selling_points-section": {
+      "type": "selling-points"
     }
   },
   "order": [
     "hero-section",
     "selling_points-section",
-    "bd-experience-section",
     "new_featured_collection",
+    "bdbento-section",
     "bd-features-section",
-    "about_bakedream-section",
-    "buyAt-section",
+    "buyADream-section",
+    "buyAt-section"
   ]
 }

@@ -1,0 +1,269 @@
+{%- style -%}
+  .bd-bento {
+    width: 100%;
+    min-height: 100dvh;
+    display: grid;
+    gap: 30px;
+    padding: 50px 30px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: var(--font-unbounded), sans-serif;
+    text-align: center;
+
+    /* Desktop - 4 columnas */
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 450px);
+    }
+
+    /* Tablet - 2 columnas */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+    }
+
+    /* Mobile - 1 columna */
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      padding: 30px 15px;
+      gap: 20px;
+      font-size: 18px;
+    }
+
+    /* Extra small - <475px */
+    @media (max-width: 475px) {
+      padding: 30px 15px;
+      gap: 15px;
+      font-size: 16px;
+    }
+  }
+
+  .bento_unpredictable {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 32px;
+    padding: 50px 30px;
+    color: var(--snow);
+    background: url('{{ "bento-unpredictable.png" | asset_url }}') center/cover no-repeat;
+    min-height: 450px;
+
+    @media (max-width: 1280px) {
+      min-height: 250px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 200px;
+      padding: 20px 15px;
+    }
+
+    @media (max-width: 475px) {
+      min-height: 180px;
+      padding: 15px 10px;
+      font-size: 14px;
+    }
+  }
+
+  .bento_fresh {
+    padding: 50px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+    font-size: 56px;
+    font-weight: 300;
+    text-align: center;
+    background-color: var(--dark-vanilla);
+    overflow: hidden;
+    line-height: 1.1;
+    min-height: 450px;
+
+    @media (min-width: 1280px) {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 1279px) {
+      grid-column: span 2;
+      order: -1;
+      min-height: 450px;
+      font-size: 40px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 250px;
+      font-size: 28px;
+      padding: 20px 15px;
+    }
+
+    @media (max-width: 475px) {
+      min-height: 200px;
+      font-size: 22px;
+      padding: 15px 10px;
+    }
+
+    & .bold {
+      font-size: 64px;
+      font-weight: 700;
+
+      @media (max-width: 1279px) {
+        font-size: 48px;
+      }
+
+      @media (max-width: 767px) {
+        font-size: 32px;
+      }
+
+      @media (max-width: 475px) {
+        font-size: 26px;
+      }
+    }
+
+    & img {
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translate(50%, 50%);
+      width: 400px;
+      height: 400px;
+      object-fit: contain;
+
+      @media (max-width: 1280px) {
+        width: 280px;
+        height: 280px;
+      }
+
+      @media (max-width: 767px) {
+        width: 200px;
+        height: 200px;
+      }
+
+      @media (max-width: 475px) {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  }
+
+  .bento_mood {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 30px;
+    color: var(--snow);
+    background: url('{{ "bento-mood.jpg" | asset_url }}') center/cover no-repeat;
+    border-radius: 32px;
+    min-height: 450px;
+
+    @media (min-width: 1280px) {
+      grid-row: span 2;
+      grid-column: 4;
+    }
+
+    @media (max-width: 1279px) {
+      min-height: 450px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 250px;
+      padding: 20px 15px;
+    }
+
+    @media (max-width: 475px) {
+      min-height: 200px;
+      padding: 15px 10px;
+      font-size: 14px;
+    }
+  }
+
+  .bento_friends {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 30px;
+    border-radius: 32px;
+    color: var(--snow);
+    background: url('{{ "bento-friends.png" | asset_url }}') center/cover no-repeat;
+    min-height: 450px;
+
+    @media (min-width: 1280px) {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    @media (max-width: 1279px) {
+      min-height: 450px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 200px;
+      padding: 20px 15px;
+    }
+
+    @media (max-width: 475px) {
+      min-height: 180px;
+      padding: 15px 10px;
+      font-size: 14px;
+    }
+  }
+
+  .bento_dreams {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 30px;
+    border-radius: 32px;
+    color: var(--snow);
+    background: url('{{ "bento-dreams.png" | asset_url }}') center/cover no-repeat;
+    min-height: 450px;
+
+    @media (min-width: 1280px) {
+      grid-column: span 2;
+      grid-row: 2;
+    }
+
+    @media (max-width: 1279px) {
+      min-height: 450px;
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 767px) {
+      min-height: 200px;
+      padding: 20px 15px;
+    }
+
+    @media (max-width: 475px) {
+      min-height: 180px;
+      padding: 15px 10px;
+      font-size: 14px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bd-bento">
+  <div class="bento_unpredictable"><span>Unpredictable</span></div>
+  <div class="bento_fresh">
+    <span>Fresh Baked</span>
+    <span class="bold">Thicc Cokies</span>
+    <img
+      class="bento_fresh__image"
+      src="{{ 'bento-fresh.png' | asset_url }}"
+      alt="Bento Cookies"
+      width="350"
+      height="350"
+      loading="lazy"
+    >
+  </div>
+  <div class="bento_friends">Enjoy with friends</div>
+  <div class="bento_dreams">Tastes like Dreams</div>
+  <div class="bento_mood">
+    Your mood, <br>
+    your cookie
+  </div>
+</section>

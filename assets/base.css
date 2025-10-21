@@ -11,11 +11,12 @@
   --alpha-badge-border: 0.1;
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
-  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
   --chocolate-cosmos: #651221;
   --old-lace: #fff2e6;
-  --dark-vanilla: #D6BCA3;
-  --snow: #FFFBF8;
+  --dark-vanilla: #d6bca3;
+  --snow: #fffbf8;
   --onyx: #383838;
   --font-unbounded: 'Unbounded', sans-serif;
   --font-ltcushion: 'LTCushion-Light', sans-serif;
@@ -1338,15 +1339,14 @@ button.shopify-payment-button__button--unbranded {
 
 shopify-accelerated-checkout {
   --shopify-accelerated-checkout-button-border-radius: var(--buttons-radius-outset);
-  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
-  rgba(var(--color-shadow), var(--shadow-opacity));
+  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
+    var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
 }
 shopify-accelerated-checkout-cart {
   --shopify-accelerated-checkout-button-border-radius: var(--buttons-radius-outset);
-  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
-  rgba(var(--color-shadow), var(--shadow-opacity));
+  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
+    var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
 }
-
 
 /* Button - other */
 
@@ -2358,8 +2358,12 @@ input[type='checkbox'] {
   top: 30px;
   position: sticky;
   z-index: 4;
-  margin: 0 30px;
+  margin: -25px 30px;
   transition: top 0.3s ease;
+
+  @media (max-width: 767px) {
+    margin: -25px 15px;
+  }
 }
 
 .section-header ~ .shopify-section-group-header-group {
